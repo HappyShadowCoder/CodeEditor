@@ -17,7 +17,7 @@ export default function EditorPref() {
 
     const updatetheme = (e) => {
       setmode(e)
-      sessionStorage.setItem("theme",e)
+      sessionStorage.setItem("mode",e)
     }
 
     const handlefontsizechange = (e) => {
