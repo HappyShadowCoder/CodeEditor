@@ -16,6 +16,16 @@ export default function TopBar({classname, theme, switchTheme, weather, handlewe
         return () => clearInterval(interval);
     }, [name]);
 
+    const [currentDate, setCurrentDate] = useState(new Date());
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+        setCurrentDate(new Date());
+        }, 60000);
+
+        return () => clearInterval(interval);
+    }, []);
+
     return (
         <>
             <div className="absolute top-0 left-0 w-screen h-10 z-50">
@@ -23,7 +33,7 @@ export default function TopBar({classname, theme, switchTheme, weather, handlewe
                     <div className="flex justify-between items-center px-5 py-4">
 
         <div className="flex items-center space-x-4">
-                <Clock className="text-xl font-bold text-[#00f5c9]" />
+                <Clock className="text-2xl font-bold text-[#00f5c9]" />
                 <p id="temperature" className="font-semibold text-lg text-white/90" style={{ fontFamily: "Satoshi" }}>
                 34°C
                 </p>
@@ -35,7 +45,6 @@ export default function TopBar({classname, theme, switchTheme, weather, handlewe
               <option value="sunny">☀️</option>
               <option value="rain">🌧️</option>
               <option value="cloudy">☁️</option>
-              <option value="mist">🌫️</option>
               <option value="snow">❄️</option>
               <option value="thunder">⛈️</option>
             </select>
@@ -64,14 +73,6 @@ export default function TopBar({classname, theme, switchTheme, weather, handlewe
             </input>
             
 
-           <button
-              aria-label="Run code"
-              className="px-3 py-1 rounded-md font-bold text-sm hover:scale-110 transition-transform duration-300
-              bg-gradient-to-r from-[#00f5c9] to-[#0ff] text-black shadow "
-            >
-              ▶ Run
-            </button>
-        
             <button onClick={() => navigate('/settings')}
             className="text-lg hover:text-[#00f5c9] hover:scale-110 transition-transform duration-300">⚙️</button>
 
@@ -79,7 +80,7 @@ export default function TopBar({classname, theme, switchTheme, weather, handlewe
         <div className="flex items-center space-x-4">
             <p className="text-lg"
             style={{fontFamily:"Satoshi"}}
-            > Monday, 24th July</p>
+            > {currentDate.toLocaleDateString()}</p>
             <div className="flex space-x-2 px-2">
                 <motion.div 
                     initial={{scale:1}}
